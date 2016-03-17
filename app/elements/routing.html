@@ -1,0 +1,76 @@
+<script src="../bower_components/page/page.js"></script>
+<script>
+  window.addEventListener('WebComponentsReady', function() {
+
+    // Removes end / from app.baseUrl which page.base requires for production
+    if (window.location.port === '') { // if production
+      page.base(app.baseUrl.replace(/\/$/, ''));
+    }
+
+    // Middleware
+    function scrollToTop(ctx, next) {
+      app.scrollPageToTop();
+      next();
+    }
+
+    function closeDrawer(ctx, next) {
+      app.closeDrawer();
+      next();
+    }
+
+    function checkLogin(ctx, next) {
+      var user = app.$.api.exposed.user;
+
+      if (!user || !user.isLogged()) {
+        app.$.toast.text = 'Требуется авторизация.';
+        app.$.toast.show();
+        page.redirect(app.baseUrl);
+      }
+      next();
+    }
+
+    // Routes
+    page('*', scrollToTop, closeDrawer, function(ctx, next) {
+      next();
+    });
+
+    page('/', function() {
+      app.route = 'login';
+    });
+
+    page('/browse', checkLogin, function() {});
+
+    page(app.baseUrl, function() {
+      app.route = 'login';
+    });
+
+    page('/controlpanel', checkLogin, function() {
+      app.route = 'controlpanel';
+    });
+
+    page('/settings', function() {
+      app.route = 'settings';
+    });
+    page('/editor', function() {
+      app.route = 'editor';
+    });
+
+    page('/history', checkLogin, function() {
+      app.$['history-page'].redraw();
+      app.route = 'history';
+    });
+
+    // 404
+    page('*', function() {
+      app.$.toast.text = 'Страница ' + window.location.href + 'не найдена.';
+      app.$.toast.show();
+      page.redirect(app.baseUrl);
+    });
+
+    // add #! before urls
+    page({
+      hashbang: true
+    });
+
+  });
+</script>

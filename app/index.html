@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Pandora" />
+  <title>АРМ Администратора</title>
+  <!-- Place favicon.ico in the `app/` directory -->
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#2E3AA1">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="CPAPP">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Pandora">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
+
+  <!-- will be replaced with elements/elements.vulcanized.html -->
+  <link rel="import" href="elements/elements.html">
+  <!-- endreplace-->
+
+  <!-- For shared styles, shared-styles.html import in elements.html -->
+  <style is="custom-style" include="shared-styles"></style>
+
+</head>
+
+<body unresolved class="fullbleed layout vertical">
+  <span id="browser-sync-binding"></span>
+  <template is="dom-bind" id="app">
+
+    <pandora-api id="api"></pandora-api>
+
+    <iris-arm-history></iris-arm-history>
+
+    <iris-connection name="conn">
+      <iris-http-connection class="connection-method"></iris-http-connection>
+      <iris-socket class="connection-method"></iris-socket>
+    </iris-connection>
+
+
+
+    <paper-drawer-panel id="paperDrawerPanel">
+      <!-- Drawer Scroll Header Panel -->
+      <paper-scroll-header-panel drawer>
+        <!-- Drawer Content -->
+        <paper-menu class="list" attr-for-selected="data-route" selected="{{entityType}}">
+          <a data-route="office" href="{{baseUrl}}ticket/browse">
+            <iron-icon icon="settings"></iron-icon>
+            <span>Талоны</span>
+          </a>
+          <a data-route="service" href="{{baseUrl}}user/browse">
+            <iron-icon icon="settings"></iron-icon>
+            <span>Пользователи</span>
+          </a>
+          <a data-route="employee" href="{{baseUrl}}workstation/browse">
+            <iron-icon icon="settings"></iron-icon>
+            <span>Рабочие места</span>
+          </a>
+          <a data-route="basics" href="{{baseUrl}}settings">
+            <iron-icon icon="settings"></iron-icon>
+            <span>Настройки</span>
+          </a>
+        </paper-menu>
+
+        <a data-route="settings" href="{{baseUrl}}settings">
+          <iron-icon icon="settings"></iron-icon>
+          <span>Настройки</span>
+        </a>
+      </paper-scroll-header-panel>
+
+      <!-- Main Area -->
+      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+
+        <iris-usercard on-menu="menuAction">
+          <paper-icon-button class="action-logout" user-logout icon="power-settings-new"></paper-icon-button>
+        </iris-usercard>
+
+
+        <!-- Main Content -->
+        <div class="content">
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+
+            <section data-route="login">
+              <paper-material class="login-page" elevation="1">
+
+                <iris-login>
+                  <div class="auth-successful">
+                    <h2>Вход выполнен</h2>
+                    <paper-button raised onclick="page('/controlpanel')">Приступить к работе</paper-button>
+                  </div>
+                </iris-login>
+              </paper-material>
+            </section>
+
+            <section data-route="controlpanel">
+
+            </section>
+
+
+            <section data-route="settings">
+              <paper-material elevation="1">
+                <iris-settings-panel></iris-settings-panel>
+              </paper-material>
+            </section>
+
+            <section data-route="history">
+              <paper-material elevation="1">
+                <iris-arm-history-view id="history-page"></iris-arm-history-view>
+              </paper-material>
+            </section>
+
+
+          </iron-pages>
+        </div>
+      </paper-scroll-header-panel>
+    </paper-drawer-panel>
+
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">
+        <iron-icon icon="close"></iron-icon>
+      </span>
+    </paper-toast>
+
+
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="scripts/interface-init.js"></script>
+  <!-- endbuild-->
+</body>
+
+</html>

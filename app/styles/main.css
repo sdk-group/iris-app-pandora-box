@@ -1,0 +1,24 @@
+body {
+  background: #fafafa;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+  overflow: hidden;
+}
+paper-input {
+  min-height: 100px;
+}
+.content {
+  height: 100%;
+  padding: 5px 20px 20px 10px;
+}
+iris-login {
+  width: 75%;
+  margin: 0 auto;
+}
+section, iron-pages {
+  width: 100%;
+}
+#drawer paper-menu a {
+  display: block;
+  padding: 20px;
+}
