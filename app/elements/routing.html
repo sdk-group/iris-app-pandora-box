@@ -2,9 +2,20 @@
 <script>
   window.addEventListener('WebComponentsReady', function() {
 
-    // Removes end / from app.baseUrl which page.base requires for production
-    if (window.location.port === '') { // if production
+    // if (window.location.port === '') { // if production
+    if (!localStorage.is_dev) { // if production
       page.base(app.baseUrl.replace(/\/$/, ''));
+    }
+
+    let settings = new IRIS.settings();
+
+    function checkSettings(ctx, next) {
+      let id = settings.getItem('pandora_arm_id');
+      if (!id) {
+        page.redirect('/settings');
+        return;
+      }
+      next();
     }
 
     // Middleware
@@ -29,30 +40,43 @@
       next();
     }
 
+    function checkAfterLogin(ctx, next) {
+      var user = app.$.api.exposed.user;
+
+      if (user && user.isLogged()) {
+        page.redirect('/ticket/browse');
+        return;
+      }
+      next();
+    }
+
     // Routes
+    page('/restart', function() {
+      app.restart_dialog = true;
+      page.redirect('/');
+      setTimeout(() => {
+        window.location.reload()
+      }, 300)
+    });
+
     page('*', scrollToTop, closeDrawer, function(ctx, next) {
       next();
     });
 
-    page('/', function() {
+    page('/', checkSettings, checkAfterLogin, function() {
       app.route = 'login';
     });
 
-    page('/browse', checkLogin, function() {});
-
-    page(app.baseUrl, function() {
+    page(app.baseUrl, checkSettings, checkAfterLogin, function() {
       app.route = 'login';
     });
 
-    page('/controlpanel', checkLogin, function() {
-      app.route = 'controlpanel';
+    page('/ticket/browse', checkSettings, checkLogin, function() {
+      app.route = 'ticket-browse';
     });
 
     page('/settings', function() {
       app.route = 'settings';
-    });
-    page('/editor', function() {
-      app.route = 'editor';
     });
 
     page('/history', checkLogin, function() {

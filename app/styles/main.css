@@ -1,24 +1,25 @@
 body {
   background: #fafafa;
-  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
-  overflow: hidden;
 }
-paper-input {
-  min-height: 100px;
-}
-.content {
-  height: 100%;
-  padding: 5px 20px 20px 10px;
-}
-iris-login {
-  width: 75%;
-  margin: 0 auto;
-}
-section, iron-pages {
+.auth-successful h2 {
   width: 100%;
+  text-align: center;
 }
-#drawer paper-menu a {
-  display: block;
-  padding: 20px;
+.auth-successful paper-button {
+  width: 100%;
+  text-align: center;
+}
+paper-card {
+  border: 1px solid #cd9660;
+  border-radius: 2px;
+  font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+paper-menu #arm-info {
+  padding: 0 16px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
 }

@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="pandora-date-picker">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <div class="month">
+      <template is="dom-repeat" items="[[weeks]]" as="week">
+        <div class="week-row">
+        </div>
+      </template>
+    </div>
+
+  </template>
+  <script>
+    'use strict'
+    Polymer({
+      is: 'pandora-date-picker',
+      properties: {
+        date: {
+          type: String
+        }
+      },
+      ready() {
+        let weeksInMonth = moment(moment().endOf('month') - moment().startOf('month')).weeks();
+        let daysInMonth = moment().daysInMonth();
+        let offset = moment().date(1).weekday();
+
+        let blank = _.fill(Array(offset), {});
+        let weeks = [];
+        weeks[0] = blank;
+        for (let i = 1; i <= daysInMonth; i += 1) {
+
+        }
+        console.log(weeksInMonth);
+        console.log(daysInMonth);
+        console.log(offset);
+
+
+      }
+    });
+  </script>
+</dom-module>

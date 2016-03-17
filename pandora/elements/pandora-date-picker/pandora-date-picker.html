@@ -1,0 +1,19 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
+
+</head><body><dom-module id="pandora-date-picker">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <div class="month">
+      <template is="dom-repeat" items="[[weeks]]" as="week">
+        <div class="week-row">
+        </div>
+      </template>
+    </div>
+
+  </template>
+  </dom-module><script src="pandora-date-picker.js"></script></body></html>

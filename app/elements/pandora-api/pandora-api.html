@@ -7,8 +7,6 @@
     (function(User, settings, History) {
       'use strict';
 
-
-
       let default_settings = [{
         name: 'API',
         items: {
@@ -20,34 +18,52 @@
           api_port: {
             element: 'input',
             label: 'Порт',
-            default: '80'
+            default: '9000'
           }
         }
       }, {
-        name: 'Рабочее место',
+        name: 'Дата-сервер',
         items: {
-          office_id: {
+          data_server: {
             element: 'input',
-            label: 'Номер офиса',
-            default: '0'
+            label: 'Сервер',
+            default: window.location.hostname
           },
-          workstation_id: {
+          data_port: {
             element: 'input',
-            label: 'Номер рабочего места',
-            default: '0'
+            label: 'Порт',
+            default: window.location.port
           }
         }
+      }, {
+        name: 'АРМ',
+        items: {
+          "pandora-box_arm_id": {
+            element: 'input',
+            label: 'ID Рабочего места'
+          },
+          "lock_delay": {
+            element: 'input',
+            label: 'Удержание кнопки приема (сек)',
+            default: 3
+          }
+
+        }
       }];
+      const workstation_type = 'pandora-box';
 
       Polymer({
         is: 'pandora-api',
         ready() {
-          console.log("<P-API> Pandora's box  is open..");
-
+          console.log(_.capitalize(workstation_type) + ' API ready');
 
           let arm_settings = new settings();
           arm_settings.addDesc(default_settings);
-          let arm_operator = new User();
+          //@NOTE: could we put something more useful than localhost
+          if (arm_settings.getDefaults('data_server') == 'localhost' && arm_settings.getItem('api_server'))
+            arm_settings.setDefaults('data_server', arm_settings.getItem('api_server'));
+
+          let arm_operator = new User(workstation_type);
           let arm_history = new History();
 
           this.exposed = {
@@ -61,7 +77,7 @@
           });
         }
       });
-    })(IRIS.User, IRIS.settings, IRIS.History);
+    })(IRIS.User, IRIS.settings, IRIS.History, IRIS.ShortcutRegistry);
   </script>
 
 </dom-module>

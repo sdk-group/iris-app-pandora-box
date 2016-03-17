@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Pandora" />
-  <title>АРМ Администратора</title>
+  <title>Pandora</title>
   <!-- Place favicon.ico in the `app/` directory -->
 
   <!-- Chrome for Android theme color -->
@@ -18,19 +18,24 @@
   <!-- Tile color for Win8 -->
   <meta name="msapplication-TileColor" content="#3372DF">
 
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="CPAPP">
-  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="images/touch/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="images/touch/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/touch/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="images/touch/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="images/touch/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/touch/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/touch/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/touch/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/touch/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/touch/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="images/touch/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/touch/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
 
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Pandora">
-  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
-
-  <!-- Tile icon for Win8 (144x144) -->
-  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 
   <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
@@ -86,11 +91,6 @@
             <span>Настройки</span>
           </a>
         </paper-menu>
-
-        <a data-route="settings" href="{{baseUrl}}settings">
-          <iron-icon icon="settings"></iron-icon>
-          <span>Настройки</span>
-        </a>
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
@@ -117,10 +117,9 @@
               </paper-material>
             </section>
 
-            <section data-route="controlpanel">
-
+            <section data-route="ticket-browse">
+              <ticket-browse></ticket-browse>
             </section>
-
 
             <section data-route="settings">
               <paper-material elevation="1">
@@ -146,7 +145,12 @@
       </span>
     </paper-toast>
 
-
+    <paper-dialog id="restart" modal opened="[[restart_dialog]]">
+      <h2>Подождите...</h2>
+      <paper-dialog-scrollable>
+        <paper-progress indeterminate></paper-progress>
+      </paper-dialog-scrollable>
+    </paper-dialog>
   </template>
 
   <!-- build:js scripts/app.js -->

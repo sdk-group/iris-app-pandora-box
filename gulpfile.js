@@ -30,7 +30,7 @@ var AUTOPREFIXER_BROWSERS = [
 	'bb >= 10'
 ];
 
-var DIST = 'admin';
+var DIST = 'pandora';
 var ENV = 'DEV';
 var build_time = Date.now();
 
@@ -274,7 +274,7 @@ gulp.task('iris-js', function () {
 // Watch files for changes & reload
 gulp.task('serve', [ /*'lint',*/ 'styles', 'elements', 'images', 'js'], function () {
 	browserSync({
-		port: 5004,
+		port: 5005,
 		notify: false,
 		logPrefix: 'PSK',
 		snippetOptions: {
@@ -301,9 +301,6 @@ gulp.task('serve', [ /*'lint',*/ 'styles', 'elements', 'images', 'js'], function
 	gulp.watch(['app/**/*'], ['js', reload]);
 	gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
 	gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
-	// gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], reload);
-	//gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['lint']);
-	//gulp.watch(['app/scripts/bundle.js'], reload);
 	gulp.watch(['app/images/**/*'], reload);
 	gulp.watch(['bower_components/iris-*/**/*'], ['js', reload]);
 });
@@ -311,7 +308,7 @@ gulp.task('serve', [ /*'lint',*/ 'styles', 'elements', 'images', 'js'], function
 // Build and serve the output from the dist build
 gulp.task('serve:dist', ['default'], function () {
 	browserSync({
-		port: 5001,
+		port: 5006,
 		notify: false,
 		logPrefix: 'PSK',
 		snippetOptions: {

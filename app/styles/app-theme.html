@@ -1,34 +1,69 @@
 <style is="custom-style">
-  /* Application theme */
+  /*
+ * PolymerThemes v1.0.3
+ * Homepage: https://polymerthemes.com
+ * Copyright 2015 Polymer Themes
+ * Licensed under BSD
+ * Based on Polymer: http://www.polymer-project.org/
+ * Compatible with Polymer 1.0
+ */
   
-  :root {
-    --dark-primary-color: #303F9F;
-    --default-primary-color: #3F51B5;
-    --light-primary-color: #C5CAE9;
-    --text-primary-color: #ffffff;
-    /*text/icons*/
-    --accent-color: #FF4081;
-    --primary-background-color: #c5cae9;
-    --primary-text-color: #212121;
-    --secondary-text-color: #727272;
-    --disabled-text-color: #bdbdbd;
-    --divider-color: #B6B6B6;
-    /* Components */
-    /* paper-drawer-panel */
-    --drawer-menu-color: #ffffff;
-    --drawer-border-color: 1px solid #ccc;
-    --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
-    /* paper-menu */
-    --paper-menu-background-color: #fff;
-    --menu-link-color: #111111;
-    --iron-overlay-backdrop-background-color: var(--mydoc-beige-200);
-    --iron-overlay-backdrop-opacity: 0.7;
-    --paper-spinner-layer-1-color: var(--mydoc-red-1000);
-    --paper-spinner-layer-2-color: var(--mydoc-red-800);
-    --paper-spinner-layer-3-color: var(--mydoc-brown-600);
-    --paper-spinner-layer-4-color: var(--mydoc-brown-200);
+  .dev {
+    display: none;
   }
-  /* General styles */
+  
+  .login-page {
+    max-width: 480px;
+  }
+  
+  html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+  }
+  
+  html,
+  body {
+    margin: 0px;
+    padding: 0px;
+    min-height: 100%;
+    color: #424242;
+    background-color: #fafafa;
+    font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+  }
+  
+  paper-menu iron-icon {
+    margin-right: 33px;
+    opacity: 0.54;
+  }
+  
+  .paper-menu > .iron-selected {
+    color: var(--default-primary-color);
+  }
+  
+  paper-menu a {
+    @apply(--layout-horizontal);
+    @apply(--layout-center);
+    text-decoration: none;
+    color: var(--menu-link-color);
+    font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    min-height: 48px;
+    padding: 0 16px;
+  }
+  
+  section {
+    padding: 20px;
+  }
+  
+  section[hero] {
+    background-color: #fff;
+  }
   
   paper-material {
     border-radius: 2px;
@@ -37,92 +72,399 @@
     width: calc(98.66% - 16px);
     margin: 16px auto;
     background: white;
-  }
-  /* Height of the scroll area */
-  
-  .content {
-    @apply(--layout);
+    padding: 15px;
   }
   
-  #toast .toast-hide-button {
-    color: #eeff41;
-    margin: 10px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 400;
+    margin: 0px;
+    padding: 0px;
+    line-height: 1em;
   }
-  /* Breakpoints */
-  /* Small */
   
-  @media (max-width: 600px) {
-    paper-material {
-      --menu-container-display: none;
-      width: calc(97.33% - 32px);
-      padding-left: 16px;
-      padding-right: 16px;
+  h1,
+  h3,
+  h5 {
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  h1 {
+    font-size: 50px;
+    margin: 30px 0px;
+  }
+  
+  h2 {
+    color: #424242;
+    margin: 20px 0px;
+  }
+  
+  h3 {
+    font-size: 25px;
+    margin: 15px 0px;
+  }
+  
+  h4 {
+    font-size: 20px;
+  }
+  
+  a,
+  a:active,
+  a:visited,
+  a:focus {
+    color: #424242;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #424242;
+    text-decoration: underline;
+  }
+  
+  :root {
+    --paper-drawer-panel-scrim-opacity: 0;
+    --paper-drawer-panel-left-drawer-container: {
+      margin-top: 64px;
+    }
+    --default-primary-color: #fb8c00;
+    --dark-primary-color: #fb8c00;
+    --light-primary-color: #c5cae9;
+    --text-primary-color: #ffffff;
+    --accent-color: #ff4081;
+    --primary-background-color: #ffffff;
+    --primary-text-color: #424242;
+    --secondary-text-color: #424242;
+    --disabled-text-color: #656565;
+    --divider-color: #e0e0e0;
+    --paper-checkbox-checked-color: #e7d3ba;
+    --paper-checkbox-checked-ink-color: #fb8c00;
+    --paper-checkbox-unchecked-color: #424242;
+    --paper-checkbox-unchecked-ink-color: #424242;
+    --paper-checkbox-label-color: #424242;
+    --paper-fab-background: #fb8c00;
+    --paper-fab-disabled-background: #e4e4e4;
+    --paper-fab-disabled-text: #656565;
+    --paper-icon-button-disabled-text: #e4e4e4;
+    --paper-input-container-color: #424242;
+    --paper-input-container-focus-color: #fb8c00;
+    --paper-input-container-invalid-color: #f44336;
+    --paper-input-container-input-color: #424242;
+    --paper-menu-background-color: #fafafa;
+    --paper-menu-color: #424242;
+    --paper-menu-disabled-color: #e4e4e4;
+    --paper-progress-active-color: #f4ebe0;
+    --paper-progress-secondary-color: #959595;
+    --paper-radio-button-checked-color: #f4ebe0;
+    --paper-radio-button-checked-ink-color: white;
+    --paper-radio-button-unchecked-color: #424242;
+    --paper-radio-button-unchecked-ink-color: #424242;
+    --paper-radio-button-label-color: #424242;
+    --paper-slider-knob-color: #f4ebe0;
+    --paper-slider-active-color: #f4ebe0;
+    --paper-slider-pin-color: #f4ebe0;
+    --paper-spinner-layer-1-color: #f4ebe0;
+    --paper-spinner-layer-2-color: #f4ebe0;
+    --paper-spinner-layer-3-color: #f4ebe0;
+    --paper-spinner-layer-4-color: #f4ebe0;
+    --paper-tabs-selection-bar-color: white;
+    --paper-tab-ink: white;
+    --paper-toggle-button-checked-bar-color: #f4ebe0;
+    --paper-toggle-button-checked-button-color: #f4ebe0;
+    --paper-toggle-button-checked-ink-color: #f4ebe0;
+    --paper-toggle-button-unchecked-bar-color: #424242;
+    --paper-toggle-button-unchecked-button-color: white;
+    --paper-toggle-button-unchecked-ink-color: white;
+    --paper-toolbar-background: #4a2015;
+    --paper-toolbar-color: #ffffff;
+    --paper-card-header-text: {
+      font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    #restart {
+      --iron-overlay-backdrop-background-color: white;
+      --iron-overlay-backdrop-opacity: 1;
+      --paper-dialog-title: {
+        font-size: 30px;
+      }
     }
   }
-  /* Tablet+ */
   
-  @media (min-width: 601px) {
-    paper-material {
-      width: calc(98% - 46px);
-      margin-bottom: 32px;
-      padding-left: 30px;
-      padding-right: 30px;
-    }
+  paper-toolbar a,
+  paper-toolbar a:hover,
+  paper-toolbar a:active,
+  paper-toolbar a:visited,
+  paper-toolbar a:focus {
+    color: #ffffff;
   }
-  /* Material Design Adaptive Breakpoints */
-  /*
-    Below you'll find CSS media queries based on the breakpoint guidance
-    published by the Material Design team. You can choose to use, customise
-    or remove these breakpoints based on your needs.
-
-    http://www.google.com/design/spec/layout/adaptive-ui.html#adaptive-ui-breakpoints
-   */
-  /* mobile-small */
   
-  @media all and (min-width: 0) and (max-width: 360px) and (orientation: portrait) {}
-  /* mobile-large */
+  paper-button.primary,
+  paper-button.btn-primary,
+  paper-button[primary] {
+    color: #e9d7c1;
+  }
   
-  @media all and (min-width: 361px) and (orientation: portrait) {}
-  /* mobile-small-landscape */
+  paper-button.primary[raised],
+  paper-button.btn-primary[raised],
+  paper-button[primary][raised] {
+    background-color: #e9d7c1;
+    color: #46413a;
+  }
   
-  @media all and (min-width: 0) and (max-width: 480px) and (orientation: landscape) {}
-  /* mobile-large-landscape */
+  paper-button.secondary,
+  paper-button.btn-secondary,
+  paper-button[secondary] {
+    color: #424242;
+  }
   
-  @media all and (min-width: 481px) and (orientation: landscape) {}
-  /* tablet-small-landscape */
+  paper-button.secondary[raised],
+  paper-button.btn-secondary[raised],
+  paper-button[secondary][raised] {
+    background-color: #424242;
+    color: #fff;
+  }
   
-  @media all and (min-width: 600px) and (max-width: 960px) and (orientation: landscape) {}
-  /* tablet-large-landscape */
+  paper-button.success,
+  paper-button.btn-success,
+  paper-button[success] {
+    color: #8bc34a;
+  }
   
-  @media all and (min-width: 961px) and (orientation: landscape) {}
-  /* tablet-small */
+  paper-button.success[raised],
+  paper-button.btn-success[raised],
+  paper-button[success][raised] {
+    background-color: #8bc34a;
+    color: #fff;
+  }
   
-  @media all and (min-width: 600px) and (orientation: portrait) {}
-  /* tablet-large */
+  paper-button.info,
+  paper-button.btn-info,
+  paper-button[info] {
+    color: #fadd60;
+  }
   
-  @media all and (min-width: 601px) and (max-width: 840px) and (orientation: portrait) {}
-  /* desktop-x-small-landscape */
+  paper-button.info[raised],
+  paper-button.btn-info[raised],
+  paper-button[info][raised] {
+    background-color: #fadd60;
+    color: #4b421d;
+  }
   
-  @media all and (min-width: 0) and (max-width: 480px) and (orientation: landscape) {}
-  /* desktop-x-small */
+  paper-button.warning[raised],
+  paper-button.btn-warning[raised],
+  paper-button[warning][raised] {
+    background-color: #ffb74d;
+    color: #4d3717;
+  }
   
-  @media all and (min-width: 0) and (max-width: 480px) and (max-aspect-ratio: 4/3) {}
-  /* desktop-small-landscape */
+  paper-button.error,
+  paper-button.btn-error,
+  paper-button[error] {
+    color: #f44336;
+  }
   
-  @media all and (min-width: 481px) and (max-width: 840px) and (orientation: landscape) {}
-  /* desktop-small */
+  paper-button.error[raised],
+  paper-button.btn-error[raised],
+  paper-button[error][raised] {
+    background-color: #f44336;
+    color: #fff;
+  }
   
-  @media all and (min-width: 481px) and (max-width: 840px) and (max-aspect-ratio: 4/3) {}
-  /* desktop-medium-landscape */
+  paper-button.link,
+  paper-button.btn-link,
+  paper-button[link] {
+    text-decoration: underline;
+  }
   
-  @media all and (min-width: 841px) and (max-width: 1280px) and (orientation: landscape) {}
-  /* desktop-medium */
+  paper-button[raised] {
+    color: #424242;
+  }
   
-  @media all and (min-width: 841px) and (max-width: 1280px) and (max-aspect-ratio: 4/3) {}
-  /* desktop-large */
+  paper-button[disabled] {
+    color: #656565 !important;
+    background: #e4e4e4 !important;
+  }
   
-  @media all and (min-width: 1281px) and (max-width: 1600px) {}
-  /* desktop-xlarge */
+  paper-icon-button.primary,
+  paper-icon-button.btn-primary,
+  paper-icon-button[primary] {
+    color: #e9d7c1;
+  }
   
-  @media all and (min-width: 1601px) and (max-width: 1920px) {}
+  paper-icon-button.primary:hover,
+  paper-icon-button.btn-primary:hover,
+  paper-icon-button[primary]:hover {
+    background-color: #f8f6f4;
+    background-color: rgba(233, 215, 193, 0.2);
+    border-radius: 50%;
+  }
+  
+  paper-icon-button.secondary,
+  paper-icon-button.btn-secondary,
+  paper-icon-button[secondary] {
+    color: #424242;
+  }
+  
+  paper-icon-button.secondary:hover,
+  paper-icon-button.btn-secondary:hover,
+  paper-icon-button[secondary]:hover {
+    background-color: #e8e8e8;
+    background-color: rgba(66, 66, 66, 0.2);
+    border-radius: 50%;
+  }
+  
+  paper-icon-button.success,
+  paper-icon-button.btn-success,
+  paper-icon-button[success] {
+    color: #8bc34a;
+  }
+  
+  paper-icon-button.success:hover,
+  paper-icon-button.btn-success:hover,
+  paper-icon-button[success]:hover {
+    background-color: #eff4e8;
+    background-color: rgba(139, 195, 74, 0.2);
+    border-radius: 50%;
+  }
+  
+  paper-icon-button.info,
+  paper-icon-button.btn-info,
+  paper-icon-button[info] {
+    color: #fadd60;
+  }
+  
+  paper-icon-button.info:hover,
+  paper-icon-button.btn-info:hover,
+  paper-icon-button[info]:hover {
+    background-color: #faf7eb;
+    background-color: rgba(250, 221, 96, 0.2);
+    border-radius: 50%;
+  }
+  
+  paper-icon-button.warning,
+  paper-icon-button.btn-warning,
+  paper-icon-button[warning] {
+    color: #ffb74d;
+  }
+  
+  paper-icon-button.warning:hover,
+  paper-icon-button.btn-warning:hover,
+  paper-icon-button[warning]:hover {
+    background-color: #fbf3e9;
+    background-color: rgba(255, 183, 77, 0.2);
+    border-radius: 50%;
+  }
+  
+  paper-icon-button.error,
+  paper-icon-button.btn-error,
+  paper-icon-button[error] {
+    color: #f44336;
+  }
+  
+  paper-icon-button.error:hover,
+  paper-icon-button.btn-error:hover,
+  paper-icon-button[error]:hover {
+    background-color: #f9e8e6;
+    background-color: rgba(244, 67, 54, 0.2);
+    border-radius: 50%;
+  }
+  
+  paper-checkbox #checkmark.paper-checkbox,
+  paper-checkbox /deep/,
+  paper-checkbox::shadow #checkmark.paper-checkbox {
+    border-color: #514a41 !important;
+  }
+  
+  paper-dialog {
+    color: #424242;
+    background-color: #fafafa;
+    font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+  }
+  
+  paper-dialog h1,
+  paper-dialog h2,
+  paper-dialog h3,
+  paper-dialog h4,
+  paper-dialog h5,
+  paper-dialog h6 {
+    overflow: visible;
+    padding: 0 1em;
+    text-align: center;
+  }
+  
+  paper-fab {
+    --text-primary-color: white;
+  }
+  
+  paper-fab {
+    background-color: #e9d7c1;
+    color: #46413a;
+    --paper-fab-keyboard-focus-background: #c89a63;
+  }
+  
+  paper-fab.primary,
+  paper-fab.btn-primary,
+  paper-fab[primary] {
+    background-color: #e9d7c1;
+    color: #46413a;
+    --paper-fab-keyboard-focus-background: #c89a63;
+  }
+  
+  paper-fab.secondary,
+  paper-fab.btn-secondary,
+  paper-fab[secondary] {
+    background-color: #424242;
+    color: #fff;
+    --paper-fab-keyboard-focus-background: #828282;
+  }
+  
+  paper-fab.success,
+  paper-fab.btn-success,
+  paper-fab[success] {
+    background-color: #8bc34a;
+    color: #fff;
+    --paper-fab-keyboard-focus-background: #496a23;
+  }
+  
+  paper-fab.info,
+  paper-fab.btn-info,
+  paper-fab[info] {
+    background-color: #fadd60;
+    color: #4b421d;
+    --paper-fab-keyboard-focus-background: #d4ad07;
+  }
+  
+  paper-fab.warning,
+  paper-fab.btn-warning,
+  paper-fab[warning] {
+    background-color: #ffb74d;
+    color: #4d3717;
+    --paper-fab-keyboard-focus-background: #cd7a00;
+  }
+  
+  paper-fab.error,
+  paper-fab.btn-error,
+  paper-fab[error] {
+    background-color: #f44336;
+    color: #fff;
+    --paper-fab-keyboard-focus-background: #a21309;
+  }
+  
+  paper-fab[disabled] {
+    color: #656565 !important;
+    background: #e4e4e4 !important;
+  }
+  
+  section.hero paper-menu,
+  section[hero] paper-menu {
+    --paper-menu-background-color: #fafafa;
+  }
+  
+  paper-tabs {
+    background-color: #f4ebe0;
+    color: #ffffff;
+  }
 </style>

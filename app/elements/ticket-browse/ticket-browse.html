@@ -1,0 +1,85 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/iris-polymer-ticketview/iris-ticketview.html">
+
+<dom-module id="ticket-browse">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      
+      .ticket {
+        border: 1px solid;
+        height: 30px;
+        position: absolute;
+      }
+      
+      .operator-plan {
+        width: 100%;
+        margin: 10px;
+      }
+      
+      .day-line {
+        width: 100%;
+        height: 40px;
+        vertical-align: top;
+      }
+    </style>
+    <iris-pandora-box id="pandora"></iris-pandora-box>
+    <paper-input label="Дата" value="{{dedicated_date}}"></paper-input>
+    <paper-button raised on-tap="updateTickets">Обновить</paper-button>
+    <pandora-date-picker></pandora-date-picker>
+    <table>
+      <template is="dom-repeat" items="[[operators]]">
+        <tr class="operator-plan">
+          <td>
+            <span class="label">[[item]]</span>
+          </td>
+          <td class="day-line">
+            <template is="dom-repeat" items="[[ticketsByOperator(item)]]" as="ticket">
+              <span class="ticket" style$="[[computeStyle(ticket)]]" on-tap="ticketInfo"></span>
+            </template>
+          </td>
+        </tr>
+      </template>
+    </table>
+    <iris-ticketview ticket="{{selected}}" view="detail" hidden$="[[!view_visible]]"></iris-ticketview>
+    <paper-toast id="toast">
+    </paper-toast>
+  </template>
+  <script>
+    Polymer({
+      is: 'ticket-browse',
+      ready() {
+        this.dedicated_date = "2016-03-24";
+        this.view_visible = false;
+      },
+      updateTickets() {
+        console.log('<browse-tickets> updating...');
+        this.operators = [];
+        this.view_visible = false;
+        this.$.pandora.getPlacementSnapshot(this.dedicated_date).then((r) => {
+          this.set('tickets', r);
+
+          this.operators = _.uniq(_.map(r, 'operator'));
+        });
+      },
+      computeStyle(ticket) {
+        let width = ticket.time_description[1] - ticket.time_description[0];
+        let absolute_width = (width / (60 * 60 * 24)) * 100;
+        let left = (ticket.time_description[0] / (60 * 60 * 24)) * 100;
+        return 'width:' + absolute_width + '%; left:' + left + '%;';
+      },
+      ticketsByOperator(oper_id) {
+        return _.filter(this.tickets, (t) => t.operator == oper_id)
+      },
+      ticketInfo(e) {
+        this.view_visible = true;
+        this.selected = e.model.ticket;
+        app.$.toast.text = 'Выбран № ' + e.model.ticket.label;
+        app.$.toast.show();
+      }
+    });
+  </script>
+</dom-module>

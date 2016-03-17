@@ -1,0 +1,51 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/iris-polymer-ticketview/iris-ticketview.html">
+
+</head><body><dom-module id="ticket-browse">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      
+      .ticket {
+        border: 1px solid;
+        height: 30px;
+        position: absolute;
+      }
+      
+      .operator-plan {
+        width: 100%;
+        margin: 10px;
+      }
+      
+      .day-line {
+        width: 100%;
+        height: 40px;
+        vertical-align: top;
+      }
+    </style>
+    <iris-pandora-box id="pandora"></iris-pandora-box>
+    <paper-input label="Дата" value="{{dedicated_date}}"></paper-input>
+    <paper-button raised="" on-tap="updateTickets">Обновить</paper-button>
+    <pandora-date-picker></pandora-date-picker>
+    <table>
+      <template is="dom-repeat" items="[[operators]]">
+        <tr class="operator-plan">
+          <td>
+            <span class="label">[[item]]</span>
+          </td>
+          <td class="day-line">
+            <template is="dom-repeat" items="[[ticketsByOperator(item)]]" as="ticket">
+              <span class="ticket" style$="[[computeStyle(ticket)]]" on-tap="ticketInfo"></span>
+            </template>
+          </td>
+        </tr>
+      </template>
+    </table>
+    <iris-ticketview ticket="{{selected}}" view="detail" hidden$="[[!view_visible]]"></iris-ticketview>
+    <paper-toast id="toast">
+    </paper-toast>
+  </template>
+  </dom-module><script src="ticket-browse.js"></script></body></html>
