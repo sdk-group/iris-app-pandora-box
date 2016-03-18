@@ -6,11 +6,24 @@
       :host {
         display: block;
       }
+      
+      .day-wrapper {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+      }
     </style>
-
+    <div class="year">
+      <paper-icon-button icon="chevron-left" on-tap="previousMonth"></paper-icon-button>
+      [[toYear(date)]], [[toMonth(date)]]
+      <paper-icon-button icon="chevron-right" on-tap="nextMonth"></paper-icon-button>
+    </div>
     <div class="month">
-      <template is="dom-repeat" items="[[weeks]]" as="week">
+      <template is="dom-repeat" items="[[month]]" as="week">
         <div class="week-row">
+          <template is="dom-repeat" items="[[week]]" as="day">
+            <span class="day-wrapper" on-tap="daySelected">[[day.label]]</span>
+          </template>
         </div>
       </template>
     </div>
@@ -22,25 +35,41 @@
       is: 'pandora-date-picker',
       properties: {
         date: {
-          type: String
+          type: String,
+          value: function() {
+            return moment().format();
+          }
+        },
+        selected: {
+          type: String,
+          notify: true
         }
       },
+      toMonth(date) {
+        return moment(date).format('MMMM');
+      },
+      toYear(date) {
+        return moment(date).format('YY');
+      },
       ready() {
-        let weeksInMonth = moment(moment().endOf('month') - moment().startOf('month')).weeks();
-        let daysInMonth = moment().daysInMonth();
-        let offset = moment().date(1).weekday();
+        let m = moment(this.date);
+        let daysInMonth = m.daysInMonth();
+        let offset = m.date(1).weekday();
 
-        let blank = _.fill(Array(offset), {});
-        let weeks = [];
-        weeks[0] = blank;
-        for (let i = 1; i <= daysInMonth; i += 1) {
+        let month = _.chunk(_.concat(_.fill(Array(offset), {
+          blank: true
+        }), _.map(_.range(1, daysInMonth + 1), d => ({
+          label: d,
+          date: m.date(d).format('YYYY-MM-DD')
+        }))), 7);
 
-        }
-        console.log(weeksInMonth);
-        console.log(daysInMonth);
-        console.log(offset);
-
-
+        this.set('month', month);
+      },
+      daySelected(e) {
+        console.log(e);
+        let day = e.model.day;
+        this.set('selected', day.date);
+        this.fire('date-selected', day);
       }
     });
   </script>

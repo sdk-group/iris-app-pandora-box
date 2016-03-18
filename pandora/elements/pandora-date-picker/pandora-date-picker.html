@@ -6,11 +6,24 @@
       :host {
         display: block;
       }
+      
+      .day-wrapper {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+      }
     </style>
-
+    <div class="year">
+      <paper-icon-button icon="chevron-left" on-tap="previousMonth"></paper-icon-button>
+      [[toYear(date)]], [[toMonth(date)]]
+      <paper-icon-button icon="chevron-right" on-tap="nextMonth"></paper-icon-button>
+    </div>
     <div class="month">
-      <template is="dom-repeat" items="[[weeks]]" as="week">
+      <template is="dom-repeat" items="[[month]]" as="week">
         <div class="week-row">
+          <template is="dom-repeat" items="[[week]]" as="day">
+            <span class="day-wrapper" on-tap="daySelected">[[day.label]]</span>
+          </template>
         </div>
       </template>
     </div>

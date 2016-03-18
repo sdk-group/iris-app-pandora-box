@@ -2,17 +2,19 @@
 
 Polymer({
   is: 'ticket-browse',
+  observers: ['updateTickets(dedicated_date)'],
   ready: function ready() {
     this.dedicated_date = "2016-03-24";
     this.view_visible = false;
   },
-  updateTickets: function updateTickets() {
+  updateTickets: function updateTickets(dedicated_date) {
     var _this = this;
 
+    if (!this.$.pandora.self()) return;
     console.log('<browse-tickets> updating...');
     this.operators = [];
     this.view_visible = false;
-    this.$.pandora.getPlacementSnapshot(this.dedicated_date).then(function (r) {
+    this.$.pandora.getPlacementSnapshot(dedicated_date).then(function (r) {
       _this.set('tickets', r);
 
       _this.operators = _.uniq(_.map(r, 'operator'));

@@ -27,9 +27,7 @@
       }
     </style>
     <iris-pandora-box id="pandora"></iris-pandora-box>
-    <paper-input label="Дата" value="{{dedicated_date}}"></paper-input>
-    <paper-button raised="" on-tap="updateTickets">Обновить</paper-button>
-    <pandora-date-picker></pandora-date-picker>
+    <pandora-date-picker selected="{{dedicated_date}}"></pandora-date-picker>
     <table>
       <template is="dom-repeat" items="[[operators]]">
         <tr class="operator-plan">

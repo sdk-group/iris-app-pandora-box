@@ -27,9 +27,7 @@
       }
     </style>
     <iris-pandora-box id="pandora"></iris-pandora-box>
-    <paper-input label="Дата" value="{{dedicated_date}}"></paper-input>
-    <paper-button raised on-tap="updateTickets">Обновить</paper-button>
-    <pandora-date-picker></pandora-date-picker>
+    <pandora-date-picker selected="{{dedicated_date}}"></pandora-date-picker>
     <table>
       <template is="dom-repeat" items="[[operators]]">
         <tr class="operator-plan">
@@ -51,15 +49,17 @@
   <script>
     Polymer({
       is: 'ticket-browse',
+      observers: ['updateTickets(dedicated_date)'],
       ready() {
         this.dedicated_date = "2016-03-24";
         this.view_visible = false;
       },
-      updateTickets() {
+      updateTickets(dedicated_date) {
+        if (!this.$.pandora.self()) return;
         console.log('<browse-tickets> updating...');
         this.operators = [];
         this.view_visible = false;
-        this.$.pandora.getPlacementSnapshot(this.dedicated_date).then((r) => {
+        this.$.pandora.getPlacementSnapshot(dedicated_date).then((r) => {
           this.set('tickets', r);
 
           this.operators = _.uniq(_.map(r, 'operator'));
