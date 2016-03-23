@@ -11,7 +11,7 @@ window.addEventListener('WebComponentsReady', function () {
   var settings = new IRIS.settings();
 
   function checkSettings(ctx, next) {
-    var id = settings.getItem('pandora_arm_id');
+    var id = settings.getItem('pandora-box_arm_id');
     if (!id) {
       page.redirect('/settings');
       return;

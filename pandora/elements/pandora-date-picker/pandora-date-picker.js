@@ -14,6 +14,9 @@ Polymer({
       notify: true
     }
   },
+  isSelected: function isSelected(selected, day_date) {
+    return selected == day_date;
+  },
   toMonth: function toMonth(date) {
     return moment(date).format('MMMM');
   },

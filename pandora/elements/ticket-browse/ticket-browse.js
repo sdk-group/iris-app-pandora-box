@@ -16,7 +16,7 @@ Polymer({
     this.view_visible = false;
     this.$.pandora.getPlacementSnapshot(dedicated_date).then(function (r) {
       _this.set('tickets', r);
-
+      console.log('tickets rec', r);
       _this.operators = _.uniq(_.map(r, 'operator'));
     });
   },

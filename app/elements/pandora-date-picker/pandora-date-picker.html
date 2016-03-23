@@ -10,7 +10,12 @@
       .day-wrapper {
         width: 48px;
         height: 48px;
-        display: inline-block;
+        text-align: center;
+      }
+      
+      td[selected] {
+        border-radius: 50%;
+        background: beige;
       }
     </style>
     <div class="year">
@@ -18,15 +23,17 @@
       [[toYear(date)]], [[toMonth(date)]]
       <paper-icon-button icon="chevron-right" on-tap="nextMonth"></paper-icon-button>
     </div>
-    <div class="month">
+    <table class="month">
       <template is="dom-repeat" items="[[month]]" as="week">
-        <div class="week-row">
+        <tr class="week-row">
           <template is="dom-repeat" items="[[week]]" as="day">
-            <span class="day-wrapper" on-tap="daySelected">[[day.label]]</span>
+            <td selected$="[[isSelected(selected,day.date)]]" class="day-wrapper" on-tap="daySelected">
+              <span>[[day.label]]</span>
+            </td>
           </template>
-        </div>
+        </tr>
       </template>
-    </div>
+    </table>
 
   </template>
   <script>
@@ -44,6 +51,9 @@
           type: String,
           notify: true
         }
+      },
+      isSelected(selected, day_date) {
+        return selected == day_date;
       },
       toMonth(date) {
         return moment(date).format('MMMM');

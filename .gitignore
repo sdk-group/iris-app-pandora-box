@@ -1,7 +1,7 @@
 #build
 node_modules
 bower_components
-.zip
+*.zip
 .tmp
 
 # Windows image file caches

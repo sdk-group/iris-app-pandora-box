@@ -10,7 +10,7 @@
     let settings = new IRIS.settings();
 
     function checkSettings(ctx, next) {
-      let id = settings.getItem('pandora_arm_id');
+      let id = settings.getItem('pandora-box_arm_id');
       if (!id) {
         page.redirect('/settings');
         return;

@@ -5,8 +5,8 @@
 
 	// Sets app default base URL
 	app.baseUrl = '';
-	if (window.location.port === '') { // if production
-		app.baseUrl = '/production/oper/';
+	if (!localStorage.is_dev) { // if production
+		app.baseUrl = '/production/pandora/';
 	}
 
 	app.displayInstalledToast = function () {

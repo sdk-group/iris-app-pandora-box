@@ -43,8 +43,8 @@
       </template>
     </table>
     <iris-ticketview ticket="{{selected}}" view="detail" hidden$="[[!view_visible]]"></iris-ticketview>
-    <paper-toast id="toast">
-    </paper-toast>
+
+    <paper-toast id="toast"></paper-toast>
   </template>
   <script>
     Polymer({
@@ -61,7 +61,7 @@
         this.view_visible = false;
         this.$.pandora.getPlacementSnapshot(dedicated_date).then((r) => {
           this.set('tickets', r);
-
+          console.log('tickets rec', r);
           this.operators = _.uniq(_.map(r, 'operator'));
         });
       },

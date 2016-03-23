@@ -18,32 +18,12 @@
       }
     }
   }, {
-    name: 'Дата-сервер',
-    items: {
-      data_server: {
-        element: 'input',
-        label: 'Сервер',
-        default: window.location.hostname
-      },
-      data_port: {
-        element: 'input',
-        label: 'Порт',
-        default: window.location.port
-      }
-    }
-  }, {
     name: 'АРМ',
     items: {
       "pandora-box_arm_id": {
         element: 'input',
         label: 'ID Рабочего места'
-      },
-      "lock_delay": {
-        element: 'input',
-        label: 'Удержание кнопки приема (сек)',
-        default: 3
       }
-
     }
   }];
   var workstation_type = 'pandora-box';
